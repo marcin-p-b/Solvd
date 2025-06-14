@@ -83,9 +83,9 @@ const convertToNumber = (val) => {
 const coerceToType = (val, type) => {
   try {
     if (type === Number) {
-      return val * 1;
+      return convertToNumber(val);
     } else if (type === String) {
-      return val + '';
+      return stringifyValue(val);
     } else if (type === Boolean) {
       return !!val;
     } else if (type === Object) {
