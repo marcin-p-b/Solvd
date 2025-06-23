@@ -2,36 +2,45 @@
 
 //Task 1
 //##############################################################
-const person = {
+const createPerson = (initialData) => {
+  let state = { ...initialData };
+
+  const person = {};
+
+  Object.keys(state).forEach((key) => {
+    Object.defineProperty(person, key, {
+      get: () => state[key],
+      enumerable: true,
+    });
+  });
+
+  Object.defineProperty(person, 'updateInfo', {
+    value: function (newInfo) {
+      Object.keys(newInfo).forEach((key) => {
+        if (state.hasOwnProperty(key)) {
+          state[key] = newInfo[key];
+        }
+      });
+    },
+    enumerable: false,
+  });
+
+  return person;
+};
+
+const person = createPerson({
   firstName: 'Jonh',
   lastName: 'Doe',
   age: 30,
   email: 'john.doe@example.com',
-};
-
-Object.defineProperties(person, {
-  firstName: { writable: false },
-  lastName: { writable: false },
-  age: { writable: false },
-  email: { writable: false },
 });
 
-// console.log(Object.getOwnPropertyDescriptors(person));
-
-person.updateInfo = function (info) {
-  for (const key in info) {
-    if (this?.hasOwnProperty(key)) {
-      Object.defineProperty(this, key, {
-        value: info[key],
-        writable: false,
-      });
-    }
-  }
-};
-
-// console.log(person);
-person.updateInfo({ firstName: 'Jane', age: 32 });
-// console.log(person);
+console.log(person);
+person.updateInfo({
+  firstName: 'Jane',
+  age: 31,
+});
+console.log(person);
 
 Object.defineProperty(person, 'address', {
   value: {},
