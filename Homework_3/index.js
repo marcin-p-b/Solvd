@@ -55,7 +55,7 @@ const getFullName = (person) => {
 
 //2
 const filterUniqueWords = (text) => {
-  const splitWords = (text) => text.split(' ');
+  const splitWords = (text) => text.toLowerCase().split(' ');
   const uniqueWords = (words) => [...new Set(words)];
   const sortWords = (words) => words.sort();
 
