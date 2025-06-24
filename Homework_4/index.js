@@ -100,29 +100,33 @@ deleteNonConfigurable(product, 'price');
 //##############################################################
 
 const bankAccount = {
-  balance: 1000,
-  set newBalance(value = 0) {
+  _balance: 1000,
+  set balance(value = 0) {
     if (typeof value === 'number' && value >= 0) {
-      this.balance = value;
+      this._balance = value;
     } else {
       console.error('Invalid balance amount.');
     }
   },
+  get balance() {
+    return this._balance;
+  },
   get formattedBalance() {
-    return `$${this.balance}`;
+    return `$${this._balance}`;
   },
 };
 
 bankAccount.transfer = function (sender, receiver, amount) {
-  sender.newBalance = sender.balance - amount;
-  receiver.newBalance = receiver.balance + amount;
+  sender.balance -= amount;
+  receiver.balance += amount;
+  receiver._balance += receiver.balance;
 };
 
-const receiverAccount = { ...bankAccount, balance: 0 };
-// console.log(receiverAccount);
+const receiverAccount = { _balance: 0, balance: 0, formattedBalance: 0 };
+// console.log('rec', receiverAccount);
 // console.log(bankAccount);
 
-bankAccount.transfer(bankAccount, receiverAccount, 500);
+bankAccount.transfer(bankAccount, receiverAccount, 100);
 
 // console.log(receiverAccount);
 // console.log(bankAccount);
@@ -131,9 +135,10 @@ bankAccount.transfer(bankAccount, receiverAccount, 500);
 //Task 4
 //##############################################################
 const createImmutableObject = function (obj) {
-  const newObj = { ...obj };
-  Object.freeze(newObj);
-  return newObj;
+  const newObj = () => {
+    return { ...obj };
+  };
+  return Object.freeze(newObj());
 };
 const immutablePerson = createImmutableObject(person);
 // console.log(Object.getOwnPropertyDescriptors(immutablePerson));
