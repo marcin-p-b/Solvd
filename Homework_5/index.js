@@ -28,7 +28,8 @@ console.log(uniqueById);
 //###############################################################
 
 //Task 2
-/*const chunkArray = function (arr, chunk) {
+/*//1 
+const chunkArray = function (arr, chunk) {
   try {
     if (chunk <= 0) throw new Error("Chunk size must be a positive integer");
     return arr.reduce((acc, _, i) => {
