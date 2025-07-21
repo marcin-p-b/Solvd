@@ -1,0 +1,37 @@
+[
+  {
+    "title": "The Art of Thinking Clearly",
+    "author": "Rolf Dobelli",
+    "isbn": "9780062219695",
+    "price": 14.99,
+    "availability": true
+  },
+  {
+    "title": "Atomic Habits",
+    "author": "James Clear",
+    "isbn": "9780735211292",
+    "price": 16.0,
+    "availability": true
+  },
+  {
+    "title": "Sapiens: A Brief History of Humankind",
+    "author": "Yuval Noah Harari",
+    "isbn": "9780062316097",
+    "price": 18.99,
+    "availability": false
+  },
+  {
+    "title": "Deep Work",
+    "author": "Cal Newport",
+    "isbn": "9781455586691",
+    "price": 15.5,
+    "availability": true
+  },
+  {
+    "title": "The Hobbit",
+    "author": "J.R.R. Tolkien",
+    "isbn": "444",
+    "price": 13.75,
+    "availability": true
+  }
+]

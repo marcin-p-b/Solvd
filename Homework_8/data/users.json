@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Alice Novak",
+    "email": "alice.novak@example.com",
+    "userId": "1"
+  },
+  {
+    "name": "Mateusz Kowalski",
+    "email": "mateusz.k@example.com",
+    "userId": "2"
+  },
+  {
+    "name": "Julia Zawadzka",
+    "email": "julia.z@example.com",
+    "userId": "3"
+  }
+]
