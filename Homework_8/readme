@@ -1,0 +1,91 @@
+Part 4
+
+Encapsulation is maintained as internal state stays hidden and is exposed only via public methods.
+
+The demostration of Object Interaction goes as follows: Users → Carts → Orders → Books
+
+Polymorphism: Subclasses used interchangeably within shared operations (example: NonFictionBook class and FictionBook that inherit the Book class's properties and extends them with own properties)
+
+Class documentation:
+📘 Book Class
+Represents a single book available in the store.
+
+class Book {
+  constructor(title, author, isbn, price, availability) {
+    this.title = title;           // Book name
+    this.author = author;         // Author of the book
+    this.isbn = isbn;             // Unique book identifier
+    this.price = price;           // Price in €
+    this.availability = availability; // true if book is in stock
+  }
+}
+
+🧑‍💻 User Class
+Represents a person who shops in your bookstore.
+
+class User {
+  constructor(name, email, userId) {
+    this.name = name;       // Customer's full name
+    this.email = email;     // Email address
+    this.userId = userId;   // Unique ID number
+  }
+}
+
+🛒 Cart Class
+Represents a shopping cart owned by a user. Can hold multiple books.
+
+Methods:
+addBook(book) - Adds a book to the cart
+removeBook(isbn) - Removes a book from the cart using its ISBN number
+getTotalPrice() - Calculates the total price of all books in the cart
+
+class Cart {
+  constructor(user) {
+    this.user = user;       // Owner of the cart (User object)
+    this.items = [];        // Books added to this cart
+  }
+  addBook(book) {
+    this.items.push(book);
+    console.log(`${book.title} has been added to ${this.user.name}'s cart.`);
+  }
+  removeBook(isbn) {
+    this.items = this.items.filter((book) => book.isbn !== isbn);
+  }
+  getTotalPrice() {
+    return this.items.reduce((total, book) => total + book.price, 0).toFixed(2);
+  }
+}
+
+📦 Order Class
+Represents a completed purchase. Created from a user’s cart.
+
+Methods:
+calculateTotal() - Adds up the price of each book in the order
+
+class Order {
+  constructor(user, books) {
+    this.user = user;           // Who placed the order
+    this.books = books;         // What books are included
+    this.orderDate = new Date();  // When the order was placed
+    this.totalPrice = this.calculateTotal(); // Final price of the order
+  }
+  calculateTotal() {
+    return this.books.reduce((sum, book) => sum + book.price, 0).toFixed(2);
+  }
+}
+
+📚 Extended Classes: Fiction & Non-Fiction
+Used when you want to store extra info like genre or subject.
+
+class FictionBook extends Book {
+  constructor(title, author, isbn, price, availability, genre) {
+    super(title, author, isbn, price, availability);
+    this.genre = genre; // e.g. Fantasy, Horror
+  }
+}
+class NonFictionBook extends Book {
+  constructor(title, author, isbn, price, availability, subject) {
+    super(title, author, isbn, price, availability);
+    this.subject = subject; // e.g. History, Psychology
+  }
+}
